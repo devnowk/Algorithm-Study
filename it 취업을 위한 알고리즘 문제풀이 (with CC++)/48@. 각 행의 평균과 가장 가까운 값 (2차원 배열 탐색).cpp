@@ -23,6 +23,7 @@ int main() {
         {
             int tmp = rowAvg - a[i][j];
             if(tmp < 0) tmp = -tmp; // 양수로 변환
+            // tmp = abs(rowAvg - a[i][j]) 해줘도 됨(algorithm 제공)
             if(tmp < distMin)
             {
                 distMin = tmp; // 더 가까우면 차이를 바꿔줌
