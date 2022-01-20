@@ -17,9 +17,9 @@ void DFS(int L, int sum) // 부분집합이 total/2가 되면 멈춤
     {
         flag = true;
         return;
-    } // else if(sum > total/2) return; // 부분집합의 합이 total/2보다 커지면 답이 절대 불가능 
+    } else if(sum > total/2) return; // 부분집합의 합이 total/2보다 커지면 답이 절대 불가능(끝까지 탐색하기 전에 return)
     // @@@ 안되는 조건이 더 있음 부분집합 합이 더 작은 경우도 return 필요함 @@@
-    else if(L == n+1) return;
+    else if(L == n+1) return; // 끝까지 탐색하면 return
     else // 재귀함수 도는 중
     {
         DFS(L+1, sum+a[L]); // 다음 레벨의 자식한테 넘기는데, 자신을 더해서 넘김(부분집합에 자기도 포함하겠다는 뜻)
