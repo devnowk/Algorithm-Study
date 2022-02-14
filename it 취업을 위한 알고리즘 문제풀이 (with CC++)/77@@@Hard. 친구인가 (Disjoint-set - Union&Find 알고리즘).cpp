@@ -7,8 +7,9 @@ int unf[1001]; // 인덱스 번호 의미 : 학생 번호, 값 의미 : 어떤 �
 int Find(int v) // @@@ 집합의 루트 노드를 반환하는 함수 @@@
 {
     if(v == unf[v]) return v; // 집합의 루트노드였을 경우
-    else return Find(unf[v]); // 루트노드를 추적해 나감
-}
+    //else return Find(unf[v]); // 루트노드를 추적해 나감 -> //가장 말단 노드가 호출되면 계속 재귀 호출돼서 효율 낮음 
+    else return unf[v] = Find(unf[v]); // @@@ 경로 압축 : 가리키는 노드가 루트노드에 가깝게 되도록 하면 됨 @@@
+} 
 
 void Union(int a, int b) // 어떤 집합인지 만들어줌
 {
