@@ -21,7 +21,7 @@ int main()
 	// freopen("input.txt", "rt", stdin);
 	
     // 다익스트라 알고리즘 : 인접한 노드 중 가중치의 누적이 최소인 노드를 방문하면서 최소 가중치를 구한다.
-	std::priority_queue<Node> pQ;
+	std::priority_queue<Node> pQ; // 최소 힙을 사용하여 정렬 시간 복잡도를 최소화 한다. O(logn)
 	std::vector<std::pair<int, int> > graph[30]; // 가중치 방향 그래프의 인접 리스트
 	int n, m; // 입력 : 정점의 수 n(1<=n<=20), 간선의 수 m
 	scanf("%d %d", &n, &m);
@@ -31,7 +31,7 @@ int main()
 	    scanf("%d %d %d", &a, &b, &c);
 	    graph[a].push_back(std::make_pair(b, c));
 	}
-	// 인덱스 번호의 정점으로 가는 최소 가중치 변수, 처음에는 무한대로 초기화 시킨다.(무한대는 연결되지 않은 노드를 의미)
+	// 1번 정점에서 인덱스 번호의 정점으로 가는 최소 가중치 변수, 처음에는 무한대로 초기화 시킨다.(무한대는 연결되지 않은 노드를 의미)
 	std::vector<int> dist(n+1, 2147000000); // @@@ n+1크기의 벡터에 값을 2147000000으로 초기화한 채로 생성한다. @@@
 	
 	// pQ 자료구조 이용하여 BFS 알고리즘으로 인접 노드 탐색
