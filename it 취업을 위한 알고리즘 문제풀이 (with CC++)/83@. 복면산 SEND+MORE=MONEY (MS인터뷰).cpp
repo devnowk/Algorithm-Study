@@ -51,8 +51,6 @@ int main()
     
     DFS(1); // 1번부터 호출
     
-    printf("  %d %d %d %d\n+ %d %d %d %d\n---------\n%d %d %d %d %d"
-    , a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[2], a[5], a[6], a[3], a[2], a[8]);
-    
+    printf(" %d\n+%d\n------\n%d", Send(), More(), Money());
     return 0;
 }
