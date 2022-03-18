@@ -14,14 +14,8 @@ int main()
     scanf("%d", &n);
     std::vector<std::vector<int> > map(n+2, std::vector<int>(n+2)); // 격자판 정보
     for(int i=1; i<=n; i++)
-    {
         for(int j=1; j<=n; j++)
-        {
-            int tmp;
-            scanf("%d", &tmp);
-            map[i][j] = tmp;
-        }
-    }
+            scanf("%d", &map[i][j]);
     
     //Q.push(std::make_pair(1, 1)); // 시작점인 (1, 1) 좌표를 넣음
     for(int i=1; i<=n; i++)
@@ -42,8 +36,10 @@ int main()
                     
                     for(int k=0; k<8; k++) // 상하좌우대각선에 1인 수 있는지 확인
                     {
-                        if(map[x+dx[k]][y+dy[k]] == 1) // 연결된 지점이면
-                            Q.push(std::make_pair(x+dx[k], y+dy[k]));
+                        int xx = x+dx[k];
+                        int yy = y+dy[k];
+                        if(map[xx][yy] == 1) // 연결된 지점이면
+                            Q.push(std::make_pair(xx, yy));
                     }
                 }
             }
