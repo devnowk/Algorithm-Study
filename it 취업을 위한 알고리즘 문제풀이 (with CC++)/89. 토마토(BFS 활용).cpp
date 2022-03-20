@@ -2,7 +2,7 @@
 #include <vector>
 #include <queue>
 
-struct Loc{
+struct Loc{ // 구조체 정의
     int x; // 익은 토마토의 x좌표
     int y; // 익은 토마토의 y좌표
     Loc(int a, int b) // 생성자
