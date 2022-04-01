@@ -27,8 +27,9 @@ int main()
     
     int n; // 입력 : 벽돌의 수
     std::cin >> n;
+    // @@@ 구조체 타입을 설정하면 크기 지정 할 수 없음 @@@
     std::vector<Brick> bricks; // 넓이를 기준으로 내림차순 정렬된 벽돌들
-    std::vector<int> mem(n); // DP : 쌓고자 하는 벽돌이 제일 꼭대기에 있다고 가정할 때의 최대 높이 값
+    std::vector<int> mem(n); // @@@ DP : 쌓고자 하는 벽돌이 제일 꼭대기에 있다고 가정할 때의 최대 높이 값 @@@
     
     for(int i=0; i<n; i++)
     {
