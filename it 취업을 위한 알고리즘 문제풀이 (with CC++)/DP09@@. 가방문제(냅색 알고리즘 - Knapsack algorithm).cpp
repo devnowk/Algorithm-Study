@@ -33,7 +33,7 @@ int main()
             
             // dp[j-weight] :  i보석의 무게를 빼고 남은 무게, dp에 기록한 최대 무게 값
             //if(dp[j-weight]+value>dp[j]) dp[j]=dp[j-weight]+value; // 현재 무게를 뺀 가장 가치 있는 값과 현재 가치를 더한 값이 dp에 있는 기존 값보다 크면 갱신
-            dp[j] = max(dp[j-weight]+value, dp[j]); // @@@ max 쓰는 게 가독성이 더 좋은 것 같음 @@@
+            dp[j] = std::max(dp[j-weight]+value, dp[j]); // @@@ max 쓰는 게 가독성이 더 좋은 것 같음 @@@
             
             //std::cout << dif << " " << value << " " << dp[j] << std::endl;
         }
