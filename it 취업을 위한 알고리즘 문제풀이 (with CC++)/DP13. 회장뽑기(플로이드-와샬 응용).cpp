@@ -32,21 +32,18 @@ int main()
     
     int minScore=50; // 회장 후보의 점수
     int cnt=0; // 회장 후보 수
-    std::vector<int> who(n+1);
+    std::vector<int> res(n+1);
     for(int i=1; i<=n; i++)
     {
         int max=0; // 친구관계의 최댓값이 이 사람의 점수가 됨
-        for(int j=1; j<=n; j++)
-        {
-            if(dis[i][j]>max) max=dis[i][j];
-        }
-        who[i]=max; // 점수 기록
-        if(max<minScore) minScore=max; // 회장 후보의 점수 갱신
+        for(int j=1; j<=n; j++) max=std::max(max, dis[i][j]); // 점수 최댓값 구하기
+        res[i]=max; // 자기 점수 기록
+        minScore = std::min(minScore, max); // 회장 후보의 점수 구하기(가장 작은 사람이 회장 후보)
     }
     
-    for(int i=1; i<=n; i++) if(who[i]==minScore) cnt++;
+    for(int i=1; i<=n; i++) if(res[i]==minScore) cnt++;
     std::cout << minScore << " " << cnt << std::endl;
-    for(int i=1; i<=n; i++) if(who[i]==minScore) std::cout << i << " ";
+    for(int i=1; i<=n; i++) if(res[i]==minScore) std::cout << i << " ";
     
     return 0;
 }
