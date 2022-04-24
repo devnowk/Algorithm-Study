@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 
 int dp[30][30]; // 이항계수 메모이제이션 배열
 int DFS(int n, int r)
