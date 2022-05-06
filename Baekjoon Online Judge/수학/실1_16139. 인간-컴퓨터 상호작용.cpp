@@ -12,7 +12,11 @@ int main()
     for(int i=1; i<=str.length(); i++)
     {
         int idx=str[i]-97; // a~z => 0~25
-        sum[idx][i]=sum[idx][i-1]+1; // 이전 값에서 하나 더해야 누적 개수가 됨
+        for(int j=i-1; j>=0; j++)
+        {
+            if(sum[idx][j]>0)
+                sum[idx][i]=sum[idx][i-1]+1; // 이전 값에서 하나 더해야 누적 개수가 됨
+        }
     }
     for(int i=0; i<q; i++)
     {
