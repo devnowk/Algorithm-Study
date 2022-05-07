@@ -9,6 +9,8 @@ int main()
     int q; // 입력 : 질문의 수(q<=2,000)
     std::cin >> str >> q;
     
+    // 어떻게 이전 값에 접근하는지 방법 -> 계속 같은 값을 넣어놓는다
+        // 이전 값이 존재할 때 복사
     for(int i=1; i<=str.length(); i++)
     {
         int idx=str[i]-97; // a~z => 0~25
