@@ -15,6 +15,7 @@ int main()
         map[tmp]=true;
     }
     int m; // 입력 : 확인할 카드 개수
+    std::cin >> m;
     for(int i=0; i<m; i++)
     {
         int tmp;
