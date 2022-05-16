@@ -5,51 +5,39 @@
 using namespace std;
 
 int solution(string s) {
-    int answer = 2147000000;
+    int answer = s.length();
     for (int i = 1; i <= s.length() / 2; i++) // 문자 길이의 반 초과로 쪼개면 쪼개는 의미가 없음
     {
-        string str = ""; // 임시 저장 문자열
-        string tmp = s.substr(0, i); // 처음 기준 문자열 변수
+        string str = ""; // 문자열 압축 결과
+
+        // 문자 i개로 쪼갠 배열
+        vector<string> tok;
+        for (int j = 0; j < s.length(); j += i)
+            tok.push_back(s.substr(j, i)); // 문자 쪼개서 벡터에 넣음(개수 초과시 있는 것만 넣음)
+
+        //for(int j=0; j<tok.size(); j++) cout << tok[j] << " ";
+        //cout << "\n";
 
         int cnt = 1; // 동일한 문자열이 몇 개 있는지
-        for (int j = i; j + i <= s.length(); j += i) // 문자열 끝까지 검사함
+        int idx = 0; // 기준이 될 tok문자
+        for (int j = 1; j < tok.size(); j++) // tok들을 하나씩 확인
         {
-            string a = s.substr(j, i); // 다음 문자열 자름
-            if (tmp.compare(a) == 0) // 기준 문자열과 동일한 문자열이 나오면
+            if (tok[idx] == tok[j]) cnt++; // 같은 문자면 숫자 늘림
+            else // 다른 문자면 이전 문자 넣어주고 idx바꾸기
             {
-                cnt++;
-            }
-            else if (tmp.compare(a) != 0)// 다른 문자열이면
-            {
-                if (cnt > 1) // 이전에 연속인 문자열이 있었다는 뜻
-                {
-                    str.append(to_string(cnt)); // 문자 개수 추가
-                    str.append(tmp); // 기준 문자 추가
-                    cnt = 1;
-                    tmp = a;
-                }
-                else if (cnt == 1) // 이전에 연속인 문자가 없었으면
-                {
-                    str.append(tmp); // 한 개 이므로 숫자 없이 문자만 추가
-                    tmp = a;
-                }
-            }
-            if (j + i + i > s.length()) // 반복문의 마지막일 때, str에 넣지 않은 문자 넣기
-            {
-                if (cnt > 1) str.append(to_string(cnt)); // 연속인 문자가 있었으면 숫자 넣어줌
-                str.append(tmp);
+                if (cnt > 1) str += to_string(cnt) + tok[idx];
+                else str += tok[idx];
+                idx = j;
+                cnt = 1;
             }
         }
-        if (s.length() % i != 0) // 쪼개는 수가 나누어 떨어지지 않으면 남는 문자들 한 번에 넣음
-        {
-            string tmp = s.substr(s.length() - s.length() % i, s.length() % i);
-            str.append(tmp);
-        }
+        if (cnt > 1)str += to_string(cnt) + tok[idx];
+        else str += tok[idx];
         //cout << str << " ";
         if (str.length() < answer) answer = str.length();
     }
 
-    if (s.length() == 1) answer = 1;
+    //if (s.length() == 1) answer = 1;
     return answer;
 }
 
