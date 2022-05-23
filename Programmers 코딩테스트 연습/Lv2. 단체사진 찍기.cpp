@@ -1,45 +1,40 @@
 ﻿#include <vector>
 #include <string>
 #include <algorithm>
-#include <unordered_map>
 
 using namespace std;
 
-unordered_map<char, int> name; // 프렌즈 이름
-vector<int> arr(8); // 인덱스는 각 프렌즈 이름을 가리키고 값은 위치를 가리킴
-vector<string> data_copy; // 입력받은 조건들
-
-bool Condition() // 입력받은 조건에 맞는지 확인
+bool Condition(int dis, int real_dis, char oper) // 입력받은 조건에 맞는지 확인
 {
-    bool check = true;
-    for (int i = 0; i < data_copy.size(); i++)
-    {
-        string tmp = data_copy[i];
-        char p1 = tmp[0], p2 = tmp[2]; // 거리를 구할 두 사람 이름
-        char oper = tmp[3]; // 연산자
-        int dis = (tmp[4] - 48) + 1; // 거리조건(원래 조건은 사이의 사람 수를 센 것이므로 거리는 +1 해줘야 함)
-        int real_dis = abs(arr[name[p1]] - arr[name[p2]]);
+    if (oper == '=' && real_dis != dis) return false;
+    else if (oper == '>' && real_dis <= dis) return false;
+    else if (oper == '<' && real_dis >= dis) return false;
 
-        if (oper == '=' && real_dis != dis) check = false;
-        else if (oper == '>' && real_dis <= dis) check = false;
-        else if (oper == '<' && real_dis >= dis) check = false;
-    }
-    return check;
+    return true;
 }
 
 
 int solution(int n, vector<string> data) {
 
-    // 전역변수 초기화
-    data_copy = data;
-    for (int i = 0; i < 8; i++) arr[i] = i;
-    name = { {'A',0}, {'C',1}, {'F',2}, {'J',3}, {'M',4}, {'N',5}, {'R',6}, {'T',7} };
-
+    vector<int> arr(8); // 인덱스는 각 프렌즈 이름을 가리키고 값은 위치를 가리킴
+    string name = "ACFJMNRT";
     int answer = 0; // 조건에 맞는 경우의 수
+
+    for (int i = 0; i < 8; i++) arr[i] = i;
+
     do
     {
-        if (Condition()) answer++;
+        bool check = true;
+        for (int i = 0; i < n; i++)
+        {
+            char p1 = data[i][0], p2 = data[i][2]; // 거리를 구할 두 사람 이름
+            char oper = data[i][3]; // 연산자
+            int dis = (data[i][4] - '0') + 1; // 거리조건(원래 조건은 사이의 사람 수를 센 것이므로 거리는 +1 해줘야 함)
+            int real_dis = abs(arr[name.find(p1)] - arr[name.find(p2)]);
 
+            if (!Condition(dis, real_dis, oper)) check = false;
+        }
+        if (check) answer++;
     } while (next_permutation(arr.begin(), arr.end()));
 
     return answer;
