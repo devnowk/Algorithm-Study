@@ -9,7 +9,7 @@ int GCD(int a, int b)
 }
 
 long long solution(int w, int h) {
-    long long answer = w * h;
+    long long answer = (long long)w * h;
 
     int gcd = GCD(w, h); // 가로 세로의 최대 공약수(겹치는 패턴의 개수)
     // 패턴의 세로 빈 칸은 h/gcd개, 가로는 두 칸일 가능성이 있는게 w/gcd-1개이다.
