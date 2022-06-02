@@ -28,8 +28,14 @@ int main()
 	std::cin >> s;
 	int cnt = 0; // 출력 : 서로 다른 부분 문자열의 개수
 
-	for(int i=1; i<=s.length(); i++)
-		DFS(0, i); // DFS 탐색의 끝은 i개일 때
+	for (int i = 1; i <= s.length(); i++) // 탐색할 개수
+	{
+		for (int j = 0; j <= s.length() - i; j++)
+		{
+			std::string tmp = s.substr(j, i); // j번째부터 i개 문자 추출
+			us.insert(tmp);
+		}
+	}
 
 	cnt = us.size(); // 최종적으로 us의 개수가 부분 문자열의 개수가 된다.
 	std::cout << cnt;
